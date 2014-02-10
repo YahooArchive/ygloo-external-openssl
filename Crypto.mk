@@ -30,6 +30,8 @@ LOCAL_MODULE:= libcrypto_static
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_STATIC_LIBRARY)
 
+ifeq (0,1)
+
 #######################################
 # target shared library
 include $(CLEAR_VARS)
@@ -83,3 +85,5 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE:= libcrypto_static
 LOCAL_ADDITIONAL_DEPENDENCIES := $(local_additional_dependencies)
 include $(BUILD_HOST_STATIC_LIBRARY)
+
+endif

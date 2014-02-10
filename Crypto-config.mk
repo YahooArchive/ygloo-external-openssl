@@ -666,6 +666,8 @@ ifeq ($(target_arch)-$(TARGET_HAS_BIGENDIAN),mips-true)
 target_arch := unknown_arch
 endif
 
+target_arch := unknown_arch
+
 target_c_flags    := $(common_c_flags) $($(target_arch)_c_flags) $(local_c_flags)
 target_c_includes := $(addprefix external/openssl/,$(common_c_includes)) $(local_c_includes)
 target_src_files  := $(common_src_files) $($(target_arch)_src_files)
