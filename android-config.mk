@@ -11,14 +11,16 @@ LOCAL_CFLAGS += $(openssl_cflags)
 
 LOCAL_CFLAGS := $(filter-out -DTERMIO, $(LOCAL_CFLAGS))
 
-ifeq ($(HOST_OS),windows)
 LOCAL_CFLAGS := $(filter-out -DDSO_DLFCN -DHAVE_DLFCN_H,$(LOCAL_CFLAGS))
-endif
 
 # Directories
 LOCAL_CFLAGS += \
   -DOPENSSLDIR="\"/system/lib/ssl\"" \
   -DENGINESDIR="\"/system/lib/ssl/engines\""
+
+# Disable RC4
+LOCAL_CFLAGS += \
+  -DOPENSSL_NO_RC4=1
 
 # Intentionally excluded http://b/7079965
 LOCAL_CFLAGS := $(filter-out -DZLIB, $(LOCAL_CFLAGS))
