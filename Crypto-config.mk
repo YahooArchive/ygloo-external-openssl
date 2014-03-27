@@ -433,9 +433,6 @@ common_src_files := \
   crypto/rc2/rc2_skey.c \
   crypto/rc2/rc2cfb64.c \
   crypto/rc2/rc2ofb64.c \
-  crypto/rc4/rc4_enc.c \
-  crypto/rc4/rc4_skey.c \
-  crypto/rc4/rc4_utl.c \
   crypto/ripemd/rmd_dgst.c \
   crypto/ripemd/rmd_one.c \
   crypto/rsa/rsa_ameth.c \
@@ -531,6 +528,11 @@ common_src_files := \
   crypto/x509v3/v3_sxnet.c \
   crypto/x509v3/v3_utl.c \
   crypto/x509v3/v3err.c \
+
+rc4_src_files := \
+  crypto/rc4/rc4_enc.c \
+  crypto/rc4/rc4_skey.c \
+  crypto/rc4/rc4_utl.c \
 
 common_c_includes := \
   . \
