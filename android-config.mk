@@ -19,8 +19,11 @@ LOCAL_CFLAGS += \
   -DENGINESDIR="\"/system/lib/ssl/engines\""
 
 # Disable RC4
-LOCAL_CFLAGS += \
-  -DOPENSSL_NO_RC4=1
+LOCAL_CFLAGS += -DOPENSSL_NO_RC4=1
+
+ifeq ($(BUILD_DEBUG),true)
+LOCAL_CFLAGS += -DPURIFY
+endif
 
 # Intentionally excluded http://b/7079965
 LOCAL_CFLAGS := $(filter-out -DZLIB, $(LOCAL_CFLAGS))
