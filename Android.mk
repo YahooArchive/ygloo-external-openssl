@@ -1,4 +1,5 @@
-LOCAL_PATH := $(call my-dir)
+OPENSSL_ROOT := $(call my-dir)
+LOCAL_PATH := $(OPENSSL_ROOT)
 
 # Enable to be able to use ALOG* with #include "cutils/log.h"
 #log_c_includes += system/core/include
@@ -11,4 +12,4 @@ include $(LOCAL_PATH)/build-config-64.mk
 include $(LOCAL_PATH)/build-config-32.mk
 include $(LOCAL_PATH)/Crypto.mk
 include $(LOCAL_PATH)/Ssl.mk
-include $(LOCAL_PATH)/Apps.mk
+#include $(LOCAL_PATH)/Apps.mk

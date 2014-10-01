@@ -14,11 +14,17 @@ LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/android-config.mk $(LOCAL_PATH)/C
 include $(LOCAL_PATH)/Crypto-config-target.mk
 include $(LOCAL_PATH)/android-config.mk
 
+LOCAL_C_INCLUDES := $(patsubst external/openssl/%,$(OPENSSL_ROOT)/%,$(LOCAL_C_INCLUDES))
+
+LOCAL_CFLAGS += -fPIC -DPIC
+LOCAL_CFLAGS += $(LOCAL_C_INCLUDES:%=-I%)
+
 # Replace cflags with static-specific cflags so we dont build in libdl deps
-LOCAL_CFLAGS_32 := $(openssl_cflags_static_32)
-LOCAL_CFLAGS_64 := $(openssl_cflags_static_64)
+#LOCAL_CFLAGS_32 := $(openssl_cflags_static_32)
+#LOCAL_CFLAGS_64 := $(openssl_cflags_static_64)
 include $(BUILD_STATIC_LIBRARY)
 
+ifeq (0,1)
 #######################################
 # target shared library
 include $(CLEAR_VARS)
@@ -75,3 +81,5 @@ LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/android-config.mk $(LOCAL_PATH)/C
 include $(LOCAL_PATH)/Crypto-config-host.mk
 include $(LOCAL_PATH)/android-config.mk
 include $(BUILD_HOST_STATIC_LIBRARY)
+
+endif

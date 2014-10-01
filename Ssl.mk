@@ -14,9 +14,18 @@ LOCAL_C_INCLUDES += $(target_c_includes)
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libssl_static
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/android-config.mk $(LOCAL_PATH)/Ssl.mk
+
 include $(LOCAL_PATH)/Ssl-config-target.mk
 include $(LOCAL_PATH)/android-config.mk
+
+LOCAL_C_INCLUDES := $(patsubst external/openssl/%,$(OPENSSL_ROOT)/%,$(LOCAL_C_INCLUDES))
+
+LOCAL_CFLAGS += -fPIC -DPIC
+LOCAL_CFLAGS += $(LOCAL_C_INCLUDES:%=-I%)
+
 include $(BUILD_STATIC_LIBRARY)
+
+ifeq (0,1)
 
 #######################################
 # target shared library
@@ -73,3 +82,5 @@ LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/android-config.mk $(LOCAL_PATH)/S
 include $(LOCAL_PATH)/Ssl-config-host.mk
 include $(LOCAL_PATH)/android-config.mk
 include $(BUILD_EXECUTABLE)
+
+endif

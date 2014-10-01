@@ -27,8 +27,10 @@ ifneq (,$(filter -DZLIB, $(openssl_cflags_32) $(openssl_cflags_64) \
 $(error ZLIB should not be enabled in openssl configuration)
 endif
 
-LOCAL_CFLAGS_32 += $(openssl_cflags_32)
-LOCAL_CFLAGS_64 += $(openssl_cflags_64)
+#LOCAL_CFLAGS_32 += $(openssl_cflags_32)
+#LOCAL_CFLAGS_64 += $(openssl_cflags_64)
+LOCAL_CFLAGS_32 += $(openssl_cflags_static_32)
+LOCAL_CFLAGS_64 += $(openssl_cflags_static_64)
 
 LOCAL_CFLAGS_32 := $(filter-out -DTERMIO, $(LOCAL_CFLAGS_32))
 LOCAL_CFLAGS_64 := $(filter-out -DTERMIO, $(LOCAL_CFLAGS_64))
@@ -46,3 +48,24 @@ endif
 
 # Add clang here when it works on host
 # LOCAL_CLANG := true
+
+ifeq ($(TARGET_ARCH),x86_64)
+LOCAL_CFLAGS += $(LOCAL_CFLAGS_64)
+else
+ifeq ($(TARGET_ARCH),arm64)
+LOCAL_CFLAGS += $(LOCAL_CFLAGS_64)
+else
+LOCAL_CFLAGS += $(LOCAL_CFLAGS_32)
+endif
+endif
+
+ifeq ($(TARGET_ARCH),arm)
+LOCAL_CFLAGS += $(LOCAL_CFLAGS_arm)
+LOCAL_SRC_FILES := $(LOCAL_SRC_FILES_arm)
+LOCAL_C_INCLUDES += $(LOCAL_C_INCLUDES_arm)
+else
+#LOCAL_CFLAGS += $(LOCAL_CFLAGS_$(TARGET_ARCH))
+#LOCAL_C_INCLUDES += $(LOCAL_C_INCLUDES_$(TARGET_ARCH))
+#LOCAL_SRC_FILES := $(LOCAL_SRC_FILES_$(TARGET_ARCH))
+LOCAL_SRC_FILES := $(common_src_files)
+endif
