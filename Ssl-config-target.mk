@@ -16,6 +16,8 @@
 LOCAL_ADDITIONAL_DEPENDENCIES += $(LOCAL_PATH)/Ssl-config-target.mk
 
 common_cflags :=
+common_cflags += -DOPENSSL_NO_SSL2
+common_cflags += -DOPENSSL_NO_SSL3
 
 common_src_files := \
   ssl/bio_ssl.c \

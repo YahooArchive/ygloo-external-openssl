@@ -15,8 +15,10 @@
 
 LOCAL_ADDITIONAL_DEPENDENCIES += $(LOCAL_PATH)/Crypto-config-target.mk
 
-common_cflags := \
-  -DNO_WINDOWS_BRAINDEATH \
+common_cflags :=
+common_cflags += -DNO_WINDOWS_BRAINDEATH
+common_cflags += -DOPENSSL_NO_SSL2
+common_cflags += -DOPENSSL_NO_SSL3
 
 common_src_files := \
   crypto/aes/aes_cbc.c \
